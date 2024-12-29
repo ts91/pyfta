@@ -1,0 +1,7 @@
+out/*
+!out/.gitkeep
+!out/example.json*
+*.json
+!example.json
+.env
+__pycache__/

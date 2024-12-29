@@ -1,0 +1,76 @@
+{
+    "name": "BAT-FIRE",
+    "node_type": "GateNode",
+    "description": "Battery catches on fire",
+    "op": "OR",
+    "children": [
+        {
+            "name": "BAT-1",
+            "node_type": "GateNode",
+            "description": "Overheated battery",
+            "children": [
+                {
+                    "name": "BAT-2",
+                    "node_type": "GateNode",
+                    "description": "Battery defective",
+                    "children": [
+                        {
+                            "name": "BAT-3",
+                            "node_type": "EventNode",
+                            "description": "Anoode - Cathode short",
+                            "q": 0.005
+                        },
+                        {
+                            "name": "BAT-4",
+                            "node_type": "EventNode",
+                            "description": "IC BAT56A04 barrier diode",
+                            "q": 0.0
+                        }
+                    ],
+                    "op": "OR"
+                },
+                {
+                    "name": "TS-1",
+                    "node_type": "EventNode",
+                    "description": "Temperature sensor failure",
+                    "q": 0.007472
+                }
+            ],
+            "op": "AND"
+        },
+        {
+            "name": "PS-1",
+            "node_type": "GateNode",
+            "description": "Power supply conditioner defective",
+            "children": [
+                {
+                    "name": "BUS-1",
+                    "node_type": "EventNode",
+                    "description": "Power bus short",
+                    "q": 0.039211
+                },
+                {
+                    "name": "PS-2",
+                    "node_type": "GateNode",
+                    "description": "Power conditioner circuit failure",
+                    "children": [
+                        {
+                            "name": "CAP-1",
+                            "node_type": "EventNode",
+                            "description": "Capacitor short",
+                            "q": 0.002996
+                        },
+                        {
+                            "name": "FD-1",
+                            "node_type": "EventNode",
+                            "description": "Fault detection failure",
+                            "q": 0.001
+                        }
+                    ],
+                    "op": "AND"
+                }
+            ],
+            "op": "OR"
+        }
+    ]
+}

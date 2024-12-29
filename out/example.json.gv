@@ -1,0 +1,134 @@
+digraph "example.json" {
+	graph [rankdir=HB]
+	"BAT-FIRE" [label=<<TABLE BORDER="0" CELLBORDER="1" CELLSPACING="0">
+                    <TR>
+                        <TD PORT="there">BAT-FIRE</TD>
+                        <TD>Battery catches on fire</TD>
+                    </TR>
+                    <TR>
+                        <TD>Q</TD>
+                        <TD>0.03925136</TD>
+                    </TR>
+                    <TR><TD PORT="here">Operator.OR</TD></TR>
+                </TABLE>> color=black shape=plaintext]
+	"BAT-1" [label=<<TABLE BORDER="0" CELLBORDER="1" CELLSPACING="0">
+                    <TR>
+                        <TD PORT="there">BAT-1</TD>
+                        <TD>Overheated battery</TD>
+                    </TR>
+                    <TR>
+                        <TD>Q</TD>
+                        <TD>0.00003736</TD>
+                    </TR>
+                    <TR><TD PORT="here">Operator.AND</TD></TR>
+                </TABLE>> color=black shape=plaintext]
+	"BAT-2" [label=<<TABLE BORDER="0" CELLBORDER="1" CELLSPACING="0">
+                    <TR>
+                        <TD PORT="there">BAT-2</TD>
+                        <TD>Battery defective</TD>
+                    </TR>
+                    <TR>
+                        <TD>Q</TD>
+                        <TD>0.00500000</TD>
+                    </TR>
+                    <TR><TD PORT="here">Operator.OR</TD></TR>
+                </TABLE>> color=black shape=plaintext]
+	"BAT-3" [label=<<TABLE BORDER="0" CELLBORDER="1" CELLSPACING="0">
+                    <TR>
+                        <TD PORT="there">BAT-3</TD>
+                        <TD>Anoode - Cathode short</TD>
+                    </TR>
+                    <TR>
+                        <TD>Q</TD>
+                        <TD>0.00500000</TD>
+                    </TR>
+                    
+                </TABLE>> color=black fillcolor=lightyellow shape=plaintext style=filled]
+	"BAT-2":here:s -> "BAT-3":there:n
+	"BAT-4" [label=<<TABLE BORDER="0" CELLBORDER="1" CELLSPACING="0">
+                    <TR>
+                        <TD PORT="there">BAT-4</TD>
+                        <TD>IC BAT56A04 barrier diode</TD>
+                    </TR>
+                    <TR>
+                        <TD>Q</TD>
+                        <TD>0.00000000</TD>
+                    </TR>
+                    
+                </TABLE>> color=black fillcolor=lightyellow shape=plaintext style=filled]
+	"BAT-2":here:s -> "BAT-4":there:n
+	"BAT-1":here:s -> "BAT-2":there:n
+	"TS-1" [label=<<TABLE BORDER="0" CELLBORDER="1" CELLSPACING="0">
+                    <TR>
+                        <TD PORT="there">TS-1</TD>
+                        <TD>Temperature sensor failure</TD>
+                    </TR>
+                    <TR>
+                        <TD>Q</TD>
+                        <TD>0.00747200</TD>
+                    </TR>
+                    
+                </TABLE>> color=black fillcolor=lightyellow shape=plaintext style=filled]
+	"BAT-1":here:s -> "TS-1":there:n
+	"BAT-FIRE":here:s -> "BAT-1":there:n
+	"PS-1" [label=<<TABLE BORDER="0" CELLBORDER="1" CELLSPACING="0">
+                    <TR>
+                        <TD PORT="there">PS-1</TD>
+                        <TD>Power supply conditioner defective</TD>
+                    </TR>
+                    <TR>
+                        <TD>Q</TD>
+                        <TD>0.03921400</TD>
+                    </TR>
+                    <TR><TD PORT="here">Operator.OR</TD></TR>
+                </TABLE>> color=black shape=plaintext]
+	"BUS-1" [label=<<TABLE BORDER="0" CELLBORDER="1" CELLSPACING="0">
+                    <TR>
+                        <TD PORT="there">BUS-1</TD>
+                        <TD>Power bus short</TD>
+                    </TR>
+                    <TR>
+                        <TD>Q</TD>
+                        <TD>0.03921100</TD>
+                    </TR>
+                    
+                </TABLE>> color=black fillcolor=lightyellow shape=plaintext style=filled]
+	"PS-1":here:s -> "BUS-1":there:n
+	"PS-2" [label=<<TABLE BORDER="0" CELLBORDER="1" CELLSPACING="0">
+                    <TR>
+                        <TD PORT="there">PS-2</TD>
+                        <TD>Power conditioner circuit failure</TD>
+                    </TR>
+                    <TR>
+                        <TD>Q</TD>
+                        <TD>0.00000300</TD>
+                    </TR>
+                    <TR><TD PORT="here">Operator.AND</TD></TR>
+                </TABLE>> color=black shape=plaintext]
+	"CAP-1" [label=<<TABLE BORDER="0" CELLBORDER="1" CELLSPACING="0">
+                    <TR>
+                        <TD PORT="there">CAP-1</TD>
+                        <TD>Capacitor short</TD>
+                    </TR>
+                    <TR>
+                        <TD>Q</TD>
+                        <TD>0.00299600</TD>
+                    </TR>
+                    
+                </TABLE>> color=black fillcolor=lightyellow shape=plaintext style=filled]
+	"PS-2":here:s -> "CAP-1":there:n
+	"FD-1" [label=<<TABLE BORDER="0" CELLBORDER="1" CELLSPACING="0">
+                    <TR>
+                        <TD PORT="there">FD-1</TD>
+                        <TD>Fault detection failure</TD>
+                    </TR>
+                    <TR>
+                        <TD>Q</TD>
+                        <TD>0.00100000</TD>
+                    </TR>
+                    
+                </TABLE>> color=black fillcolor=lightyellow shape=plaintext style=filled]
+	"PS-2":here:s -> "FD-1":there:n
+	"PS-1":here:s -> "PS-2":there:n
+	"BAT-FIRE":here:s -> "PS-1":there:n
+}
